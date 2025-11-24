@@ -22,7 +22,7 @@ export const putVacancy = async (vacancyData, employerId) => {
 
     // Item preparation
     const Item = {
-        id: uniqueId,
+        ID: uniqueId,
         employerId: employerId,
         creationDate: new Date().toISOString(),
         ...vacancyData  

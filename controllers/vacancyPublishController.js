@@ -8,7 +8,7 @@ export const publishVacancy = async (req, res) => {
 
     try {
         // Extraction
-        const employerId = req.employerId;
+        const employerId = req.body;
         const vacancyData = req.body;
 
         // Auth Validation
