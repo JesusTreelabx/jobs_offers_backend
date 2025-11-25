@@ -50,7 +50,7 @@ export const putVacancy = async (vacancyData, employerId) => {
 
 //     const params = {
 //         TableName: "jobsOffersTable",
-//         Key: { id: vacancyId },
+//         Key: { ID: vacancyId },
 //     };
 
 //     const { Item } = await ddbDocClient.send(new GetCommand(params));
@@ -65,7 +65,7 @@ export const putVacancy = async (vacancyData, employerId) => {
 
 //     const deleteParams = {
 //         TableName: "jobsOffersTable",
-//         Key: { id: vacancyId },
+//         Key: { ID: vacancyId },
 //     };
 
 //     try {
