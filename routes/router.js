@@ -11,7 +11,7 @@ jobsRouter.get('/testRouter', (req, res) => {
 });
 
 
-jobsRouter.use('/candidates', candidateRouter);
+// jobsRouter.use('/candidates', candidateRouter);
 jobsRouter.use('/employers', employerRouter);
 
 
