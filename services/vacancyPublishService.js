@@ -17,15 +17,17 @@ const ddbDocClient = DynamoDBDocumentClient.from(client);
 // Save a new Vacancy
 export const putVacancy = async (vacancyData, employerId) => {
 
+
     // ID Generation
     const uniqueId = `VAC-${Date.now()}-${Math.random().toString(16).slice(2, 6)}`;
 
     // Item preparation
     const Item = {
+        ...vacancyData,
         ID: uniqueId,
-        employerId: employerId,
         creationDate: new Date().toISOString(),
-        ...vacancyData  
+        employerId: employerId,
+
     };
 
     const params = {
@@ -45,34 +47,34 @@ export const putVacancy = async (vacancyData, employerId) => {
 
 
 // Delete Vacancy
-// export const deleteVacancy = async (vacancyId, employerId) => {
+export const deleteVacancy = async (vacancyId, employerId) => {
 
 
-//     const params = {
-//         TableName: "jobsOffersTable",
-//         Key: { ID: vacancyId },
-//     };
+    const params = {
+        TableName: "jobsOffersTable",
+        Key: { ID: vacancyId },
+    };
 
-//     const { Item } = await ddbDocClient.send(new GetCommand(params));
+    const { Item } = await ddbDocClient.send(new GetCommand(params));
 
-//     if (!Item) {
-//         throw new Error("Vacancy not found");
-//     }
-//     if (Item.employerId !== employerId) {
-//         throw new Error("Unauthorized: Employer ID does not match");
-//     }
+    if (!Item) {
+        throw new Error("Vacancy not found");
+    }
+    if (Item.employerId !== employerId) {
+        throw new Error("Unauthorized: Employer ID does not match");
+    }
 
 
-//     const deleteParams = {
-//         TableName: "jobsOffersTable",
-//         Key: { ID: vacancyId },
-//     };
+    const deleteParams = {
+        TableName: "jobsOffersTable",
+        Key: { ID: vacancyId },
+    };
 
-//     try {
-//         await ddbDocClient.send(new DeleteCommand(deleteParams));
-//         return { message: "Vacancy deleted successfully" };
-//     } catch (error) {
-//         console.error("Error deleting vacancy:", error);
-//         throw error;
-//     }
-// };
+    try {
+        await ddbDocClient.send(new DeleteCommand(deleteParams));
+        return { message: "Vacancy deleted successfully" };
+    } catch (error) {
+        console.error("Error deleting vacancy:", error);
+        throw error;
+    }
+};

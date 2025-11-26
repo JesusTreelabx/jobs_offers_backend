@@ -1,10 +1,14 @@
 import express from 'express';
 import jobsRouter from './routes/router.js';
-
+import cors from 'cors';
 
 const app = express();
 const port = process.env.port || 3000;
 
+app.use(cors({
+    origin: '*',
+    allowedHeaders: ['Content-Type', 'x-employer-id'],
+}));
 
 app.use(express.json());
 app.use(jobsRouter);
