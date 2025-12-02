@@ -17,8 +17,8 @@ export const getTemplatesByEmployer = async (employerId) => {
         TableName: TABLE_NAME,
         FilterExpression: "employerId = :eId AND isTemplate = :template",
         ExpressionAttributeValues: {
-            "eId": employerId,
-            "template": true
+            ":eId": employerId,
+            ":template": true
         },
     };
 
