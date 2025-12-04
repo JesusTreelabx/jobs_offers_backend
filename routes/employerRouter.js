@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { publishVacancy, deleteVacancyController } from '../controllers/vacancyPublishController.js';
 import { validateVacancy, vacancyValidationRules } from '../validators/vacancyValidation.js';
-import { listTemplatesController } from '../controllers/vacancyTemplateController.js';
+import { listTemplatesController, createTemplateController, deleteTemplateController } from '../controllers/vacancyTemplateController.js';
 
 const employerRouter = Router();
 
@@ -41,6 +41,16 @@ employerRouter.delete('/vacancy/publish/:id',
 employerRouter.get('/vacancy/templates',
     authMiddleware,
     listTemplatesController,
+);
+
+employerRouter.post('/vacancy/templates',
+    authMiddleware,
+    createTemplateController,
+);
+
+employerRouter.delete('/vacancy/templates/:id',
+    authMiddleware,
+    deleteTemplateController,
 );
 
 export default employerRouter;
